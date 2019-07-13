@@ -7,10 +7,7 @@ import org.apache.ibatis.session.*;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: Yaking
@@ -69,11 +66,34 @@ public class ParameterTest {
         System.out.println(personLists);
     }
 
+    /*添加多条数据*/
+    public void processMybatisBatch() {
+        SqlSession sqlSession = getSqlSessionFactory().openSession();
+        PersonMapper personMapper = sqlSession.getMapper(PersonMapper.class);
+        List<Person> persons = new ArrayList<Person>();
+        for (int i = 0; i < 5; i++) {
+            Person person = new Person("tom" + i, "email@" + i, "f");
+            persons.add(person);
+        }
+        personMapper.addPersons(persons);
+        sqlSession.commit();
+    }
+
+    public void testBatchForExecutor() {
+        SqlSession sqlSession = this.getSqlSessionFactory().openSession(ExecutorType.BATCH);
+        PersonMapper personMapper = sqlSession.getMapper(PersonMapper.class);
+        for (int i = 0; i < 10000; i++) {
+            personMapper.addPerson(new Person("tom", "tom@qq.com", "F"));
+        }
+        sqlSession.commit();
+    }
+
     public static void main(String[] args) {
         /*new ParameterTest().deletePerson();*/
         /*new ParameterTest().testPersonByNameAndGender();*/
         /*new ParameterTest().testCollection();*/
-        new ParameterTest().testForeach();
+        /*new ParameterTest().testForeach();*/
+        /*new ParameterTest().processMybatisBatch();*/
+        new ParameterTest().testBatchForExecutor();
     }
-
 }

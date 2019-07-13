@@ -27,4 +27,9 @@ public interface PersonMapper {
 
     /*查询为多条数据*/
     public List<Person> getPersonByIds(int[] ids);
+
+    /*插入多条数据*/
+    public int addPersons(@Param("persons") List<Person> person);
+
+    public int addPerson(Person person);
 }
