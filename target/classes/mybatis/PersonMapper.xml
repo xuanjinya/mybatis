@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.huang.mybatis.dao.PersonMapper">
+    <resultMap id="BaseResultMap" type="cn.huang.mybatis.bean.Person">
+        <id column="id" property="id" javaType="Integer"/>
+        <result column="username" property="username" javaType="String"/>
+        <result column="email" property="email" javaType="String"/>
+        <result column="gender" property="gender" javaType="String"/>
+        <result column="dept_id" property="deptId" javaType="Integer"/>
+    </resultMap>
+
+    <delete id="deletePerson" parameterType="int">
+        delete from person where id = #{parmeter}
+    </delete>
+
+    <!--方式一：select * from person where username = #{param1} and gender = #{param2}-->
+    <!--方式二：select * from person where username = #{username} and gender = #{gender}-->
+    <!--方式三：select * from person where username = #{name} and gender = #{gender}-->
+    <select id="getPersonByNameAndGender" resultType="person">
+          select * from person where username = #{param1} and gender = #{param2}
+    </select>
+
+    <!--Mybatis的入参处理-->
+    <!--select * from person where id = #{list[0]}-->
+    <!--select * from person where id = #{array[0]}-->
+    <select id="getPersonByCollection" resultType="Person">
+        select * from person where id = #{test[0]}
+    </select>
+<!--separator:遍历出来的每个值使用什么分隔（,） open：进行连接的sql语句的前半部分（除遍历的值）select * from person where id in（1，2，3，4）-->
+    <select id="getPersonByIds" resultType="person">
+        select * from person where id in
+        <foreach collection="array" item="id" index="i" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+</mapper>
