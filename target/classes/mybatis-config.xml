@@ -19,6 +19,12 @@
         <package name="cn.huang.mybatis.bean"/>
     </typeAliases>
 
+    <plugins>
+        <plugin interceptor="cn.huang.mybatis.interceptor.MyFirstInterceptor">
+            <property name="hello" value="world"></property>
+        </plugin>
+    </plugins>
+
     <environments default="dev_mysql">
         <environment id="dev_mysql">
             <transactionManager type="JDBC"></transactionManager>

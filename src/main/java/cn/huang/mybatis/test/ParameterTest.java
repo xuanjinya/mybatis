@@ -91,9 +91,9 @@ public class ParameterTest {
     public static void main(String[] args) {
         /*new ParameterTest().deletePerson();*/
         /*new ParameterTest().testPersonByNameAndGender();*/
-        /*new ParameterTest().testCollection();*/
+        new ParameterTest().testCollection();
         /*new ParameterTest().testForeach();*/
         /*new ParameterTest().processMybatisBatch();*/
-        new ParameterTest().testBatchForExecutor();
+        /*new ParameterTest().testBatchForExecutor();*/
     }
 }

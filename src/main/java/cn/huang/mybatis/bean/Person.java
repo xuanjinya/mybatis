@@ -10,13 +10,6 @@ public class Person {
     private String username;
     private String email;
     private String gender;
-
-    public Person(String username, String email, String gender) {
-        this.username = username;
-        this.email = email;
-        this.gender = gender;
-    }
-
     private Dept dept;
 
     public Person() {
@@ -28,6 +21,17 @@ public class Person {
         this.email = email;
         this.gender = gender;
         this.dept = dept;
+    }
+
+    public Person(String username, String email, String gender) {
+        this.username = username;
+        this.email = email;
+        this.gender = gender;
+    }
+
+    public Person(String username, String gender) {
+        this.username = username;
+        this.gender = gender;
     }
 
     public Integer getId() {
@@ -79,12 +83,5 @@ public class Person {
                 ", gender='" + gender + '\'' +
                 ", dept=" + dept +
                 '}';
-    }
-
-    /*两个参数的构造方法*/
-
-    public Person(String username, String gender) {
-        this.username = username;
-        this.gender = gender;
     }
 }
